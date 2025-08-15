@@ -37,7 +37,7 @@ module.exports = (config, options) => {
   // Example: define a build-time flag you can use in code
   config.plugins.push(
     new webpack.DefinePlugin({
-      'process.env.TEVET_API': JSON.stringify(process.env.TEVET_API || ''),
+      'process.env.REMOTE_LOGIN': JSON.stringify(process.env.TEVET_API || ''),
       __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
     })
   );
