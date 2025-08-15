@@ -1,18 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FormGroup,
-  FormBuilder,
-  Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { EventBuss } from '@auth/eventBuss';
 import { ActionType } from 'packages/utils/eventBuss/src/lib/eventBuss/types/action.type';
 import { LoginService } from '@auth/login';
-
+import { Loading } from '@auth/loading';
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, Loading],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -35,7 +32,7 @@ export class Login {
   onSubmit(): void {
     if (this.loginService.loginForm.valid) {
       const user = this.loginService.loginForm.value;
-      console.log('Form submitted:', user);
+      this.loginService.loading = true; // Set loading state to true
       this.eventBuss.emit({
         type: ActionType.LOGIN,
         payload: user,

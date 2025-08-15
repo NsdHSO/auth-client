@@ -2,7 +2,8 @@
   class="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
 >
   <div
-    class="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10"
+    class="relative block max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10"
+    [class.opacity-50]="loginService.loading"
   >
     <div class="text-center">
       <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
@@ -121,5 +122,8 @@
         </button>
       </div>
     </form>
+    @if (loginService.loading) {
+      <lib-loading />
+     }
   </div>
 </div>
