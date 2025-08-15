@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@auth/eventBuss": ["packages/utils/eventBuss/src/index.ts"],
+      "@auth/http-response": ["packages/utils/http-response/src/index.ts"],
+      "@auth/login": ["packages/utils/login/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

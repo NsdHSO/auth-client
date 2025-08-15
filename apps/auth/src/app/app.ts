@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { EventBuss } from '@auth/eventBuss';
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, AsyncPipe],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
-  protected title = 'auth';
+  /**
+   * Event Buss
+   * This service handles the event bus logic, allowing components to communicate
+   * by emitting and subscribing to events.
+   * It uses a Subject to manage the event stream and provides an observable for subscribers. 
+   */
+  eventBuss = inject(EventBuss);
 }

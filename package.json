@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nx reset && nx serve auth",
     "build": "nx build auth",
-    "gen:lib": "read -p 'Enter library name: ' LIBNAME && nx g @nx/angular:library packages/ui/$LIBNAME --tags=ui®"
+    "gen:lib": "read -p 'Enter library name: ' LIBNAME && nx g @nx/angular:library packages/ui/$LIBNAME --tags=ui®",
+    "gen:util": "read -p 'Enter library name: ' LIBNAME && nx g @nx/angular:library packages/utils/$LIBNAME --tags=utils®"
   },
   "private": true,
   "dependencies": {

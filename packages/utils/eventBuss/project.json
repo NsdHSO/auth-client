@@ -1,0 +1,20 @@
+{
+  "name": "eventBuss",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/utils/eventBuss/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["utils®"],
+  "targets": {
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../../coverage/packages/utils/eventBuss"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
