@@ -1,0 +1,70 @@
+name: Semantic Release
+
+on:
+  workflow_run:
+    workflows: [ "Publish In github page" ]
+    types:
+      - completed
+    branches:
+      - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    permissions:
+      contents: write      # to create release (semantic-release)
+      issues: write        # to create issues (semantic-release)
+      pull-requests: write # to create pull requests (semantic-release)
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          # This is important - it ensures the action runs in the context of your repository
+          # and can push changes
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Setup Git identity
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Create semantic-release configuration
+        run: |
+          cat > .releaserc.json << 'EOF'
+          {
+            "branches": ["master"],
+            "plugins": [
+              "@semantic-release/commit-analyzer", 
+              "@semantic-release/release-notes-generator",
+              "@semantic-release/github"
+            ]
+          }
+          EOF
+
+      - name: Install semantic-release
+        run: npm install -g semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
+
+      - name: Debug token permissions
+        run: |
+          echo "Token permissions check (safe - not showing the actual token)"
+          echo "Token starts with: ${GITHUB_TOKEN:0:4}..."
+          echo "Token length: ${#GITHUB_TOKEN}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npx semantic-release --debug

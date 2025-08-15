@@ -1,0 +1,69 @@
+name: Publish In github page
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Create .env file
+        run: |
+          echo "TEVET_API=${{ secrets.TEVET_API }}" >> .env
+          # Add more environment variables as needed
+
+      - name: Build Project
+        run: pnpm run build
+        env:
+          # You can also pass env variables directly to the build command
+          TEVET_API: ${{ secrets.TEVET_API }}
+
+
+      - name: Build Project
+        run: pnpm run build
+
+      - name: Archive build
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy_dist
+          path: dist/apps/auth
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: deploy_dist
+          path: dist/apps/auth
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}  # Use built-in token
+          branch: gh-pages  # Corrected branch name
+          folder: dist/apps/auth  # Precise folder to deploy
