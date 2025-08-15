@@ -18,6 +18,7 @@ export class Login {
   fb = inject(FormBuilder);
 
   ngOnInit(): void {
+    console.log(process.env['TEVET_API'] );
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],

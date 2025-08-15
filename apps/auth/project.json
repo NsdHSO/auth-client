@@ -7,21 +7,27 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular/build:application",
+      "executor": "@angular-builders/custom-webpack:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "customWebpackConfig": {
+          "path": "apps/auth/webpack.config.js"
+        },
         "outputPath": "dist/apps/auth",
-        "browser": "apps/auth/src/main.ts",
+        "index": "apps/auth/src/index.html",
+        "main": "apps/auth/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/auth/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/auth/public"
+            "input": "apps/auth/public",
+            "output": "/"
           }
         ],
-        "styles": ["apps/auth/src/styles.scss"]
+        "styles": ["apps/auth/src/styles.scss"],
+        "scripts": []
       },
       "configurations": {
         "production": {
@@ -51,7 +57,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@angular/build:dev-server",
+      "executor": "@angular-builders/custom-webpack:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "auth:build:production"
@@ -83,7 +89,7 @@
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "auth:build",
-        "staticFilePath": "dist/apps/auth/browser",
+        "staticFilePath": "dist/apps/auth",
         "spa": true
       }
     }
