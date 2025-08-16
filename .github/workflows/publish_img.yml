@@ -38,7 +38,6 @@ jobs:
           # You can also pass env variables directly to the build command
           REMOTE_URL: ${{ secrets.REMOTE_URL }}
 
-
       - name: Build Project
         run: pnpm run build
 
