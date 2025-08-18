@@ -49,19 +49,23 @@ export class LoginService {
     user: T
   ): Observable<BackendResponse<T>> {
     return this.httpClient
-      .post<BackendResponse<T>>(this.remoteLoginUrl, user)
+      .post<BackendResponse<T>>(this.remoteLoginUrl, user, { withCredentials: true })
       .pipe(
         tap((response: any) => {
           this.loading = false;
           if (response.code === 'OK') {
-            this.accessToken.set(response.message.accessToken);
+            // Support several response shapes for the access token
+            const token = response?.message?.accessToken || response?.accessToken || response?.token || null;
+            if (token) {
+              this.accessToken.set(token);
+            }
             const next = sessionStorage.getItem('next');
             const client = sessionStorage.getItem('client');
             const state = sessionStorage.getItem('state');
             if (next) {
               const nextDecoded = atob(next);
               const url = new URL(decodeURIComponent(nextDecoded));
-             window.location.href = url.href;
+              window.location.href = url.href;
             } else if (client) {
               window.location.href = client;
             } else if (state) {

@@ -1,4 +1,4 @@
-import { inject, Injectable, linkedSignal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpHandler,
@@ -20,13 +20,11 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = linkedSignal(()=> this.loginService.accessToken());
-    console.log(token());
     // Outgoing request phase
     if (!isAuthEndpoint(req.url)) {
       const token = this.loginService.accessToken();
       if (token) {
-        req = req.clone({ setHeaders: { Authorization: `Bearer ${token} `} });
+        req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
       }
     }
 
@@ -34,13 +32,11 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap(event => {
         if (event instanceof HttpResponse) {
-          // Capture token from login response body (adjust if your API uses headers instead)
-          if (event.url?.includes('/v1/auth/login') && event.body?.access_token) {
-            this.loginService.accessToken.set(event.body.access_token);
-          }
-          // If you also want to capture from refresh:
-          if (event.url?.includes('/v1/auth/refresh') && event.body?.access_token) {
-            this.loginService.accessToken.set(event.body.access_token);
+          // Capture token from common response shapes
+          const body: any = event.body || {};
+          const token = body?.message?.accessToken || body?.accessToken || body?.token || body?.access_token || null;
+          if (isAuthEndpoint(event.url || '') && token) {
+            this.loginService.accessToken.set(token);
           }
         }
       })
