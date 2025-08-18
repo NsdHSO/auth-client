@@ -58,6 +58,9 @@
     "serve": {
       "continuous": true,
       "executor": "@angular-builders/custom-webpack:dev-server",
+      "options": {
+        "port": 4300
+      },
       "configurations": {
         "production": {
           "buildTarget": "auth:build:production"
