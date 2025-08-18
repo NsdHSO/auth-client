@@ -1,4 +1,4 @@
-function sanitizeNext(next: string | null): string | null {
+export function sanitizeNext(next: string | null): string | null {
   if (!next) return null;
 
   // Option A: allow only relative paths (recommended)
