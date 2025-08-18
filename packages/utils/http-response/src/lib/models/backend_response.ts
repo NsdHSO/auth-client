@@ -3,15 +3,15 @@
  * This directly corresponds to your `HttpCodeW` enum.
  */
 export type BackendHttpCode =
-  | 200 // OK
-  | 201 // Created
-  | 204 // No Content
-  | 400 // Bad Request
-  | 401 // Unauthorized
-  | 404 // Not Found
-  | 409 // Conflict
-  | 500 // Internal Server Error
-  | 501; // Not Implemented
+  | 'OK' // OK
+  | 'Created'// Created
+  | 'No Content' // No Content
+  | 'Bad Request' // Bad Request
+  | 'Unauthorized' // Unauthorized
+  | 'Not Found' // Not Found
+  | 'Conflict' // Conflict
+  | 'Internal Server Error' // Internal Server Error
+  | ' Not Implemented'; // Not Implemented
 
 /**
  * The generic interface for all responses coming from your backend.

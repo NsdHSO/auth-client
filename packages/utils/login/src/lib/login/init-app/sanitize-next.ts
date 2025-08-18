@@ -6,7 +6,8 @@ export function sanitizeNext(next: string | null): string | null {
 
   // Option B: if you also allow full URLs, enforce a strict allowlist
   try {
-    const url = new URL(next);
+    const nextDecoded = atob(next);
+    const url = new URL(decodeURIComponent(nextDecoded));
     const allowed = new Set([
       'http://localhost:4200',
       'https://tevet-troc-client.vercel.app/',

@@ -1,14 +1,16 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { REMOTE_LOGIN } from '../../provider/api.token';
-import { catchError, delay, Observable, of, Subject, tap, throwError } from 'rxjs';
+import { catchError, Observable, of, Subject, tap } from 'rxjs';
 import { User } from '../../interfaces';
 import { HttpClient } from '@angular/common/http';
 import { BackendHttpCode, BackendResponse } from '@auth/http-response';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
+  accessToken = signal('');
   fb = inject(FormBuilder);
 
   loginForm = this.fb.group({
@@ -37,19 +39,37 @@ export class LoginService {
    * Loading state to indicate whether the login process is in progress.
    * This can be used to show a loading spinner or disable the form during submission.
    */
-  loading= false;
+  loading = false;
 
   /**
    * Submits the login form data to the remote login URL.
    * @param user - The user data to be submitted.
    */
-  submit<T>(user: T): Observable<BackendResponse<T>> {
+  submit<T>(
+    user: T
+  ): Observable<BackendResponse<T>> {
     return this.httpClient
       .post<BackendResponse<T>>(this.remoteLoginUrl, user)
       .pipe(
-        delay(20000), // Simulate network delay for demonstration purposes
-        tap((response) => {
+        tap((response: any) => {
           this.loading = false;
+          if (response.code === 'OK') {
+            this.accessToken.set(response.message.accessToken);
+            const next = sessionStorage.getItem('next');
+            const client = sessionStorage.getItem('client');
+            const state = sessionStorage.getItem('state');
+            if (next) {
+              const nextDecoded = atob(next);
+              const url = new URL(decodeURIComponent(nextDecoded));
+             window.location.href = url.href;
+            } else if (client) {
+              window.location.href = client;
+            } else if (state) {
+              window.location.href = state;
+            } else {
+              window.location.href = '/';
+            }
+          }
         }),
         catchError((error) => {
           if (error.status === 401) {
@@ -67,7 +87,7 @@ export class LoginService {
             console.error('Login failed: Internal Server Error');
           }
 
-          this.loading= false; // Reset loading state after the request completes
+          this.loading = false; // Reset loading state after the request completes
           return of({
             message: 'An error occurred during login',
             code: error.status as BackendHttpCode,

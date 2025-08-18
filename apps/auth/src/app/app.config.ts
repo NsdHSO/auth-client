@@ -1,22 +1,24 @@
 import {
-  ApplicationConfig,
+  ApplicationConfig, importProvidersFrom,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
-import { initApp } from '../../../../packages/utils/login/src/lib/login/init-app/init-app';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { authProvider, initApp } from '@auth/login';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    importProvidersFrom(HttpClientModule),
+    authProvider,
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(),
     provideRouter(appRoutes),
     provideAppInitializer(() => {
-      let handover
+      return initApp(new URLSearchParams(window.location.search));
     }),
   ],
 };
