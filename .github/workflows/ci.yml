@@ -20,15 +20,16 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
 
       # Cache node_modules
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .nvmrc
           cache: 'pnpm'
 
+      - run: pnpm --version && node -v && pnpm exec nx report
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps
       - uses: nrwl/nx-set-shas@v4
@@ -36,3 +37,5 @@ jobs:
       # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
       # When you enable task distribution, run the e2e-ci task instead of e2e
       - run: pnpm exec nx affected -t lint test build e2e
+        env:
+          NODE_ENV: production
