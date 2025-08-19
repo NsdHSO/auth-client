@@ -11,7 +11,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "customWebpackConfig": {
-          "path": "apps/auth/webpack.config.js"
+          "path": "webpack.config.js"
         },
         "outputPath": "dist/apps/auth",
         "index": "apps/auth/src/index.html",
