@@ -12,6 +12,7 @@ export function sanitizeNext(next: string | null): string | null {
       'http://localhost:4200',
       'https://tevet-troc-client.vercel.app/',
       'https://nsdhso.github.io/tevet-troc-client/',
+      'https://tevet-troc-client-git-appointments-nechiforel-davids-projects.vercel.app/',
     ]);
     if (allowed.has(url.origin)) return next;
   } catch {
