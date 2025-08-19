@@ -27,19 +27,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Create .env file
-        run: |
-          echo "REMOTE_URL=${{ vars.REMOTE_URL }}" >> .env
-          # Add more environment variables as needed
-
       - name: Build Project
         run: pnpm run build
         env:
           # You can also pass env variables directly to the build command
           REMOTE_URL: ${{ vars.REMOTE_URL }}
+      - name: Clear Nx cache
+        run: npx nx reset
 
       - name: Build Project
-        run: pnpm run build
+        run: pnpm run build --verbose
 
       - name: Archive build
         uses: actions/upload-artifact@v4
