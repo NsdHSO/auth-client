@@ -38,9 +38,6 @@ importers:
       rxjs:
         specifier: ~7.8.0
         version: 7.8.2
-      webpack:
-        specifier: ^5
-        version: 5.101.2(@swc/core@1.5.29(@swc/helpers@0.5.17))
       zone.js:
         specifier: ~0.15.0
         version: 0.15.1
@@ -162,6 +159,9 @@ importers:
       vitest:
         specifier: ^3.0.0
         version: 3.2.4(@types/node@18.16.9)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@22.1.0)(less@4.3.0)(sass-embedded@1.90.0)(sass@1.89.2)(terser@5.43.1)(yaml@2.8.1)
+      webpack:
+        specifier: ^5.98.0
+        version: 5.101.2(@swc/core@1.5.29(@swc/helpers@0.5.17))
 
 packages:
 
