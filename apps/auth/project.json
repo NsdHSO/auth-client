@@ -55,6 +55,53 @@
       },
       "defaultConfiguration": "production"
     },
+    "build-vercel": {
+      "executor": "@angular-builders/custom-webpack:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "customWebpackConfig": {
+          "path": "apps/auth/webpack.config.js"
+        },
+        "outputPath": "dist/apps/auth",
+        "index": "apps/auth/src/index.html",
+        "main": "apps/auth/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/auth/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/auth/public",
+            "output": "/"
+          }
+        ],
+        "styles": ["apps/auth/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
     "serve": {
       "continuous": true,
       "executor": "@angular-builders/custom-webpack:dev-server",
