@@ -34,6 +34,14 @@ jobs:
       - run: pnpm exec playwright install --with-deps
       - uses: nrwl/nx-set-shas@v4
 
+      # Diagnostic step: build the specific app with verbose logs and no cache
+      - run: NX_CACHE=false pnpm exec nx build auth --configuration=production --skip-nx-cache --verbose
+        env:
+          NODE_ENV: production
+
+      # Print versions of key webpack loaders/plugins to catch mismatches
+      - run: pnpm ls webpack css-loader sass sass-loader mini-css-extract-plugin postcss postcss-loader dotenv-webpack @angular-devkit/build-angular @ngtools/webpack || true
+
       # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
       # When you enable task distribution, run the e2e-ci task instead of e2e
       - run: pnpm exec nx affected -t lint test build e2e
