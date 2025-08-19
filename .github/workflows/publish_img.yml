@@ -27,13 +27,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Clear Nx cache
+        run: npx nx reset
+
       - name: Build Project
-        run: pnpm run build
+        run: pnpm run build --verbose
         env:
           # You can also pass env variables directly to the build command
           REMOTE_URL: ${{ vars.REMOTE_URL }}
-      - name: Clear Nx cache
-        run: npx nx reset
+
 
       - name: Build Project
         run: pnpm run build --verbose
