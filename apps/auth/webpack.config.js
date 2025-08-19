@@ -3,10 +3,6 @@ const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 module.exports = (config, options) => {
-  // Ensure NODE_ENV aligns with Angular build mode
-  const mode = options?.buildOptions?.optimization ? 'production' : 'development';
-  process.env.NODE_ENV = process.env.NODE_ENV || mode;
-
   // Load .env from workspace root by default, allow per-app override
   const envPathCandidates = [
     path.resolve(__dirname, '../../.env'), // workspace root
@@ -31,10 +27,11 @@ module.exports = (config, options) => {
       silent: true,
       expand: true,
       allowEmptyValues: true,
+      allowlist: ['REMOTE_URL', 'TEVET_API_REMOTE']
     })
   );
 
-  // Example: define a build-time flag you can use in code
+  // Example: define a build-time flag you can use in code (avoid redefining NODE_ENV)
   config.plugins.push(
     new webpack.DefinePlugin({
       'process.env.REMOTE_LOGIN': JSON.stringify(process.env.REMOTE_URL || ''),

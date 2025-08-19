@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-builders/custom-webpack": "^17",
+    "@angular-builders/custom-webpack": "^20",
     "@angular/common": "~20.1.0",
     "@angular/compiler": "~20.1.0",
     "@angular/core": "~20.1.0",
