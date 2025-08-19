@@ -11,7 +11,6 @@ import { Loading } from '@auth/loading';
   selector: 'app-login',
   imports: [CommonModule, ReactiveFormsModule, Loading],
   templateUrl: './login.html',
-  styleUrl: './login.css',
 })
 export class Login {
   /**
@@ -27,7 +26,7 @@ export class Login {
 
   /**
    * Handles form submission.
-   * Validates the form and submits the user data to the login service.   
+   * Validates the form and submits the user data to the login service.
    */
   onSubmit(): void {
     if (this.loginService.loginForm.valid) {
