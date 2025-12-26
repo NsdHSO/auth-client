@@ -7,9 +7,10 @@ import { EventBuss } from '@auth/eventBuss';
 import { ActionType } from 'packages/utils/eventBuss/src/lib/eventBuss/types/action.type';
 import { LoginService } from '@auth/login';
 import { Loading } from '@auth/loading';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule, Loading],
+  imports: [CommonModule, ReactiveFormsModule, Loading, RouterLink],
   templateUrl: './login.html',
 })
 export class Login {
@@ -22,7 +23,6 @@ export class Login {
   eventBuss = inject(EventBuss);
 
   loginService = inject(LoginService);
-
 
   /**
    * Handles form submission.
