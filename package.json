@@ -1,5 +1,5 @@
 {
-  "name": "@tevet-troc-client/source",
+  "name": "@auth-client/source",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
