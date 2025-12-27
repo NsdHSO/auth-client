@@ -15,41 +15,65 @@
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <form class="space-y-6" action="#" method="POST">
         <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">
-            Full Name
-          </label>
-          <div class="mt-1">
-            <input id="name" name="name" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-          </div>
-        </div>
-
-        <div>
           <label for="email" class="block text-sm font-medium text-gray-700">
             Email address
           </label>
           <div class="mt-1">
-            <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <input id="email" name="email" type="email" autocomplete="email" required
+                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
           </div>
         </div>
-
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">
+            UserName
+          </label>
+          <div class="mt-1">
+            <input id="username" name="username" type="text"
+                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          </div>
+        </div>
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">
             Password
           </label>
           <div class="mt-1">
-            <input id="password" name="password" type="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <input id="password" name="password" type="password" required
+                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          </div>
+        </div>
+
+        <div>
+          <label for="firstName" class="block text-sm font-medium text-gray-700">
+            First Name
+          </label>
+          <div class="mt-1">
+            <input id="firstName" name="firstName" type="text"
+                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          </div>
+        </div>
+        <div>
+          <label for="lastName" class="block text-sm font-medium text-gray-700">
+            Last Name
+          </label>
+          <div class="mt-1">
+            <input id="lastName" name="lastName" type="text"
+                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
           </div>
         </div>
 
         <div class="flex items-center">
-          <input id="terms" name="terms" type="checkbox" required class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+          <input id="terms" name="terms" type="checkbox" required
+                 class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
           <label for="terms" class="ml-2 block text-sm text-gray-900">
-            I agree to the <a href="#" class="text-indigo-600 hover:text-indigo-500">Terms</a> and <a href="#" class="text-indigo-600 hover:text-indigo-500">Privacy Policy</a>
+            I agree to the <a href="#" class="text-indigo-600 hover:text-indigo-500">Terms</a> and <a href="#"
+                                                                                                      class="text-indigo-600 hover:text-indigo-500">Privacy
+            Policy</a>
           </label>
         </div>
 
         <div>
-          <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button type="submit"
+                  class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Register
           </button>
         </div>
@@ -66,10 +90,12 @@
         </div>
 
         <div class="mt-6">
-          <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+          <button type="button"
+                  class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
             <span class="sr-only">Sign in with Google</span>
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.9 3.32-2.11 4.39-1.34 1.2-3.22 2.09-5.73 2.09-4.47 0-8.14-3.22-8.14-7.68s3.67-7.68 8.14-7.68c2.41 0 4.19.94 5.49 2.19l2.31-2.31C18.41 3.2 15.75 2 12.48 2 6.48 2 2 6.48 2 12s4.48 10 10.48 10c3.24 0 5.69-1.07 7.58-3.05 1.95-1.95 2.57-4.69 2.57-6.95 0-.44-.04-.87-.1-1.3H12.48z"/>
+              <path
+                d="M12.48 10.92v3.28h7.84c-.24 1.84-.9 3.32-2.11 4.39-1.34 1.2-3.22 2.09-5.73 2.09-4.47 0-8.14-3.22-8.14-7.68s3.67-7.68 8.14-7.68c2.41 0 4.19.94 5.49 2.19l2.31-2.31C18.41 3.2 15.75 2 12.48 2 6.48 2 2 6.48 2 12s4.48 10 10.48 10c3.24 0 5.69-1.07 7.58-3.05 1.95-1.95 2.57-4.69 2.57-6.95 0-.44-.04-.87-.1-1.3H12.48z" />
             </svg>
             <span class="ml-2">Google</span>
           </button>
