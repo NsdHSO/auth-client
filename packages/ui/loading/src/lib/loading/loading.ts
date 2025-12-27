@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'lib-loading',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './loading.html',
   styleUrl: './loading.scss',
 })

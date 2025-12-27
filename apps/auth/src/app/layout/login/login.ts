@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import {
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -10,7 +10,7 @@ import { Loading } from '@auth/loading';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule, Loading, RouterLink],
+  imports: [ReactiveFormsModule, Loading, RouterLink],
   templateUrl: './login.html',
 })
 export class Login {
