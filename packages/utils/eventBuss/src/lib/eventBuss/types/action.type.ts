@@ -16,5 +16,6 @@ export interface Action<T> {
 }
 
 export enum ActionType {
-	LOGIN
+	LOGIN,
+  REGISTER,
 }

@@ -3,8 +3,7 @@ import { Component, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
 } from '@angular/forms';
-import { EventBuss } from '@auth/eventBuss';
-import { ActionType } from 'packages/utils/eventBuss/src/lib/eventBuss/types/action.type';
+import { EventBuss, ActionType } from '@auth/eventBuss';
 import { LoginService } from '@auth/login';
 import { Loading } from '@auth/loading';
 import { RouterLink } from '@angular/router';
