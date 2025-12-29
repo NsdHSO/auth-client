@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { AuthRequestBody } from '../models/register.type';
 import {
   email,
@@ -38,13 +38,13 @@ export class Register {
     (schemaPath) => {
       required(schemaPath.email);
       email(schemaPath.email);
-
       required(schemaPath.password);
       minLength(schemaPath.password, 8);
-
       required(schemaPath.terms);
     },
   );
+  userNameDuplicate = signal(false);
+
   loading = signal(false);
   onSubmit(payload: AuthRequestBody | unknown | any) {
     if (payload) {
@@ -53,12 +53,15 @@ export class Register {
         tap(() => {
           this.loading.set(false);
         }),
-        catchError((error) => {
+        catchError((error: { error: BackendResponse<string> }) => {
+          if (error.error.message.includes(' duplicate key')) {
+            this.userNameDuplicate.set(true);
+          }
           console.error(error);
           this.loading.set(false);
           return of({
             message: 'An error occurred during login',
-            code: error.status as BackendHttpCode,
+            code: error.error.code as BackendHttpCode,
           } as BackendResponse<any>);
         }),
       );
