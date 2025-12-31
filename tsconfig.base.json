@@ -18,7 +18,8 @@
       "@auth/eventBuss": ["packages/utils/eventBuss/src/index.ts"],
       "@auth/http-response": ["packages/utils/http-response/src/index.ts"],
       "@auth/loading": ["packages/ui/loading/src/index.ts"],
-      "@auth/login": ["packages/utils/login/src/index.ts"]
+      "@auth/login": ["packages/utils/login/src/index.ts"],
+      "@auth-client/register": ["packages/utils/register/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

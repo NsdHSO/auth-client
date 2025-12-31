@@ -1,16 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import {
   ReactiveFormsModule,
 } from '@angular/forms';
-import { EventBuss } from '@auth/eventBuss';
-import { ActionType } from 'packages/utils/eventBuss/src/lib/eventBuss/types/action.type';
+import { EventBuss, ActionType } from '@auth/eventBuss';
 import { LoginService } from '@auth/login';
 import { Loading } from '@auth/loading';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule, Loading, RouterLink],
+  imports: [ReactiveFormsModule, Loading, RouterLink],
   templateUrl: './login.html',
 })
 export class Login {
